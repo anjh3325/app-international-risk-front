@@ -23,6 +23,7 @@ export class UserService {
     };
   }
 
+  // post : 회원가입
   createUser(user: User): Observable<User> {
     if (!user.name) {
       catchError(this.handleError<User>('값을 입력해주세요.'));
@@ -36,6 +37,7 @@ export class UserService {
       .pipe(catchError(this.handleError<User>(`중복된 이름입니다.`)));
   }
 
+  // post : 로그인
   signInUser(user: User): Observable<User> {
     return this.http
       .post<User>(this.userUrl + '/signIn', user, this.httpOptions)
@@ -45,7 +47,12 @@ export class UserService {
         )
       );
   }
+  // delete : 유저 삭제
   deleteUser(user: User): Observable<User> {
-    return this.http.delete<User>(this.userUrl, user, this.httpOptions);
+    return this.http
+      .delete<User>(this.userUrl, this.httpOptions)
+      .pipe(
+        catchError(this.handleError<User>('비밀번호가 일치하지 않습니다.'))
+      );
   }
 }
