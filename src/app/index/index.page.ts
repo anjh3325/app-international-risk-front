@@ -4,10 +4,8 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-index',
   standalone: true,
+  templateUrl: './index.page.html',
+  styleUrls: ['./index.page.scss'],
   imports: [CommonModule],
-  templateUrl: './index.component.html',
-  styleUrls: ['./index.component.scss']
 })
-export class IndexComponent {
-
-}
+export default class IndexPage {}
